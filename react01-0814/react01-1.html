@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 步驟1：載入react和babel -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        img {
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 步驟2：載入根元素(root) -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // 步驟3：建立React元件
+        function App() {
+            // return只會抓第一層，第一層的開頭要跟return同一行(或是整個小括號起來)，也可以用<></>包起來
+            return (
+                <div>
+                    <div>
+                        <h2>我是圖片</h2>
+                        <img src="../images/child-3045207_1280.jpg" alt=""/>
+                    </div>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem magni neque laboriosam libero, harum eius nulla excepturi cum officiis impedit incidunt perspiciatis, repellat dicta voluptatum recusandae vero nihil nostrum suscipit.</p>
+                </div>
+            )
+
+            // return <>
+            //     <div>
+            //         <div>
+            //             <h2>我是圖片</h2>
+            //             <img src="../images/child-3045207_1280.jpg" alt="" />
+            //         </div>
+            //         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem magni neque laboriosam libero, harum eius nulla excepturi cum officiis impedit incidunt perspiciatis, repellat dicta voluptatum recusandae vero nihil nostrum suscipit.</p>
+            //     </div>
+            // </>
+
+            // return <div>
+            //     <div>
+            //         <h2>我是圖片</h2>
+            //         <img src="../images/child-3045207_1280.jpg" alt="" />
+            //     </div>
+            //     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem magni neque laboriosam libero, harum eius nulla excepturi cum officiis impedit incidunt perspiciatis, repellat dicta voluptatum recusandae vero nihil nostrum suscipit.</p>
+            // </div>
+        }
+        // 步驟4：渲染(顯示)App元件到根元件(root)上
+        const el = document.getElementById("root");
+        const root = ReactDOM.createRoot(el);
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
