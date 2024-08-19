@@ -31,6 +31,24 @@
           // 3. 沒有正確結尾，結尾不正確
           // 4. 屬性轉換名稱運用要正確
           // 5. return 建議加入括號
+          // 6. for => htmlFor
+          // 7. class => className
+          // 8. style = {{color: "red"}}
+          // 9. value => defaultValue
+
+          function App() {
+            return <>
+              <label htmlFor="exampleDataList" className="form-label" style={{ color: "var(--bs-blue)" }}>Datalist example</label>
+              <input className="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." />
+              <datalist id="datalistOptions">
+                <option value="San Francisco" />
+                <option value="New York" />
+                <option value="Seattle" />
+                <option value="Los Angeles" />
+                <option value="Chicago" />
+              </datalist>
+            </>
+          }
 
           // 將下列訂正
           // function app() {
@@ -49,7 +67,7 @@
           // 簡寫法
           ReactDOM
             .createRoot(document.getElementById('root'))
-            .render(<app />);
+            .render(<App />);
         </script>
 
         <!-- 練習結束 -->

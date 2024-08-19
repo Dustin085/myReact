@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        :root {
+            --bg-c: #ababab;
+            --light: #ffffff;
+            --content-gap: 45px;
+            --article-gap: 35px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        address {
+            font-style: normal;
+        }
+
+        body {
+            background-color: var(--bg-c);
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #line-today-content {
+            max-width: 768px;
+            margin: 5px auto;
+            padding: 30px 40px;
+            background-color: var(--light);
+            border-radius: 10px;
+        }
+
+        #line-today-content>.title {
+            margin: 40px 0;
+        }
+
+        #line-today-content .content {
+            display: flex;
+            flex-direction: column;
+            row-gap: var(--content-gap);
+        }
+
+        #line-today-content .content .intro {
+            display: flex;
+            flex-direction: column;
+            row-gap: 35px;
+        }
+
+        #line-today-content .article {
+            display: flex;
+            flex-direction: column;
+            row-gap: var(--article-gap);
+        }
+
+        #line-today-content .article .hashtag {
+            font-weight: 700;
+        }
+        #line-today-content .article .warningText {
+            color: #ababab;
+        }
+
+        .article-fig {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function App() {
+            const data = {
+                title: "花蓮遛小孩這樣玩！7個人氣「花蓮親子景點」推薦，日式庭園農場、海濱沙灘車一次收。",
+                paraList: [
+                    "花蓮親子景點7個必玩攻略！假日玩花蓮，除了必看絕美的蔚藍海景外，當地農場不僅能近距離接觸小動物，還有許多裝置藝術、網美打卡點，帶小孩出去玩，也能順便拍打卡美照，窩客島這次整理7個人氣「花蓮親子景點」，日式庭園風、網美系農場，以及濱海兒童公園等親子景點，通通都要先收入口袋。",
+                    "帶小孩來花蓮先衝「張家の樹園」，不僅可以近距離接觸梅花鹿、山羌、羊駝、水豚等小動物，還能免費換上浴衣在日式庭園中打卡，滿足媽媽們的拍照慾望；而「崇德瑩農場」園內還有天空之鏡、沙灘車等網美打卡點、遊樂設施，一次體驗多種玩法；面向海洋的濱海「太平洋公園」，有著鞦韆、彈跳床、環形溜索，以及海盜船戲沙溜滑梯等遊樂設施，玩完還能到海邊繼續玩沙、看海，小孩玩一個下午都不夠。"
+                ],
+                figUrlList: [
+                    "https://today-obs.line-scdn.net/0hloZ529_aM0BnTCOYlydMF18aPzFUKilJRSl_chZObndIYHJDUn1gIxUcP2xCeSceR310IRUZbHlILHBDCw/w1200",
+                    "https://today-obs.line-scdn.net/0hOd0fvoxEEEsNHwCT_XNvHDVJHDo-eQpCL3paKyBMGykpMwBIZipDKChPTmcpKgAdLX5ffX0dRy4oLgIaZQ/w1200"
+                ],
+                articleList: [
+                    {
+                        title: "花蓮日式庭園餵動物 #張家の樹園",
+                        para: "部落客 大手牽小手。玩樂趣 造訪 張家の樹園 說：不僅可以享受美食，還能與羊駝、山羌、梅花鹿等可愛的小動物進行互動和餵食，此外，餐廳還提供日式和服體驗，讓遊客可以穿上日本和服，拍攝風格獨特的網美照片<全文介紹>部落客粉絲團（部落客粉絲團如無法顯示，因為受限於隱私設定）",
+                        hashtag: "#張家の樹園",
+                        address: "花蓮縣吉安鄉慶豐四街200之一號",
+                        phoneNum: "03-853-0282",
+                        figList: [
+                            {
+                                url: "https://today-obs.line-scdn.net/0hZhpCjfJXBUdNOhWfvVZ6EHVsCTZ-XB9Ob15OdTxtUiVkFkcWcV1WJG4zWWtpXUYYbQxMI2ltXXVlDBYQJQ/w1200",
+                                warningText: "張家の樹園 / WalkerLand窩客島整理提供 未經許可不可轉載"
+                            },
+                            {
+                                url: "https://today-obs.line-scdn.net/0hN0Arx9pqER98CwHHjGduSERdHW5PbQsWXm0KflteTn1TJ1dMEj9CfFxeHDNYP1cbXD8NKgsKRi9YOl4bSA/w1200",
+                                warningText: "張家の樹園 / WalkerLand窩客島整理提供 未經許可不可轉載"
+                            }
+                        ],
+                    }
+                ]
+
+            }
+            return <>
+                <main>
+                    <section id="line-today-content">
+                        <h1 className="title">{data.title}</h1>
+                        <div className="content">
+                            <div className="intro">
+                                <p className="para-text">{data.paraList[0]}</p>
+                                <figure className="article-fig"><img src={data.figUrlList[0]} alt="" /></figure>
+                                <p className="para-text">{data.paraList[1]}</p>
+                                <figure className="article-fig"><img src={data.figUrlList[1]} alt="" /></figure>
+                            </div>
+                            <article className="article">
+                                <h2 className="title">{data.articleList[0].title}</h2>
+                                <p className="para-text">{data.articleList[0].para}</p>
+                                <div className="info-box">
+                                    <p className="hashtag">{data.articleList[0].hashtag}</p>
+                                    <address className="address">地址：{data.articleList[0].address}</address>
+                                    <p className="phone-number">電話：{data.articleList[0].phoneNum}</p>
+                                </div>
+                                <div className="fig-box">
+                                    <figure className="article-fig"><img src={data.articleList[0].figList[0].url} alt="" /></figure>
+                                    <small className="warningText">{data.articleList[0].figList[0].warningText}</small>
+                                </div>
+                                <div className="fig-box">
+                                    <figure className="article-fig"><img src={data.articleList[0].figList[1].url} alt="" /></figure>
+                                    <small className="warningText">{data.articleList[0].figList[1].warningText}</small>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </main>
+            </>
+        }
+
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>

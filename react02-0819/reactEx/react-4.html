@@ -26,7 +26,10 @@
                 <div id="root"></div>
                 <script type="text/babel">
                     function App() {
-                        const htmlTemplate = '<div>這裡有一段文字</div>'
+                        // 建立一個變數帶有html標籤與內容，必須裝在物件裡面，屬性為__html: ""
+                        const htmlTemplate = {
+                            __html: '<div>這裡有一段文字</div>'
+                        };
 
                         return (
                             <div>
@@ -55,15 +58,26 @@
                                 </div>
 
                                 {/* dangerouslySetInnerHTML */}
-                                <div dangerouslySetInnerHTML={{ __html: htmlTemplate }}>
+                                <div dangerouslySetInnerHTML={htmlTemplate}>
                                     {/*<div>這裡有一段文字</div>*/}
                                 </div>
                                 {/* onChange */}
-                                <div><input type="text" onChange={
-                                    function(){
-                                        console.log("onChange");
-                                    }
-                                }/></div>
+                                <div>
+                                    <input type="text" onChange={
+                                        function () {
+                                            console.log("onChange");
+                                        }
+                                    } />
+                                </div>
+
+                                {/* 取得輸入的資料 */}
+                                <div>
+                                    <input type="text" onChange={
+                                        function () {
+                                            console.log(event.target.value);
+                                        }
+                                    } />
+                                </div>
 
 
 

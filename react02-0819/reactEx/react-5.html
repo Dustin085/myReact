@@ -12,6 +12,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.min.js"
         integrity="sha512-1/8Tj23BRrWnKZXeBruk6wTnsMJbi/lJsk9bsRgVwb6j5q39n0A00gFjbCTaDo5l5XrPVv4DZXftrJExhRF/Ug=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        .redColor{
+            color: red;
+        }
+    </style>
 </head>
 
 <body class="bg-lighter">
@@ -29,19 +34,47 @@
 
                 <script type="text/babel">
                     // 程式撰寫區
+                    function App() {
+                        // 資料抽離
+                        const data = {
+                            imgUrl: "https://media.istockphoto.com/id/1401100981/photo/young-woman-freelancer-traveler-working-online-using-laptop-and-enjoying-the-beautiful-nature.jpg?b=1&s=170667a&w=0&k=20&c=APFnR6nLEdH4MxojjFdNi6-g0jXE6zlvb0EXJmkkgwU=",
+                            title: "卡片標題",
+                            desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi culpa aspernatur tempore cupiditate illo minima voluptatem blanditiis optio accusantium earum voluptate magni repellendus ipsa dolor adipisci liberoqui commodi veritatis.",
+                            btnLink: "https://unsplash.com/s/photos/free",
+                            btnName: "Go somewhere"
+                        }
+
+                        return <>
+                            <div className="card" style={{ width: "18rem", marginBottom: "25px" }}>
+                                <div className="card-img-top" style={{
+                                    height: "200px",
+                                    backgroundImage: `url(${data.imgUrl})`,
+                                    backgroundSize: "cover",
+                                    backgroundPosition: "center center",
+                                }}></div>
+                                <div className="card-body">
+                                    <h5 className="card-title redColor">{data.title}</h5>
+                                    <p className="card-text">{data.desc}</p>
+                                    <a href={data.btnLink} target="_blank" className="btn btn-primary">{data.btnName}</a>
+                                </div>
+                            </div>
+                        </>
+                    }
+
+                    ReactDOM
+                        .createRoot(document.getElementById("root"))
+                        .render(<App />);
                 </script>
 
                 <!-- HTML -->
                 <div class="card" style="width: 18rem">
-                    <div 
-                        class="card-img-top" 
-                        style="height: 200px;
+                    <div class="card-img-top" style="height: 200px;
                         background-image: url('https://media.istockphoto.com/id/1401100981/photo/young-woman-freelancer-traveler-working-online-using-laptop-and-enjoying-the-beautiful-nature.jpg?b=1&s=170667a&w=0&k=20&c=APFnR6nLEdH4MxojjFdNi6-g0jXE6zlvb0EXJmkkgwU=');
                         background-size: cover;
                         background-position: center center;
                         ">
                     </div>
-                    <div class="card-body"> 
+                    <div class="card-body">
                         <h5 class="card-title">卡片標題</h5>
                         <p class="card-text">
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi culpa
@@ -49,7 +82,8 @@
                             accusantium earum voluptate magni repellendus, ipsa dolor adipisci libero
                             qui commodi veritatis.
                         </p>
-                        <a href="https://unsplash.com/s/photos/free" target="_blank" class="btn btn-primary">Go somewhere</a>
+                        <a href="https://unsplash.com/s/photos/free" target="_blank" class="btn btn-primary">Go
+                            somewhere</a>
                     </div>
                 </div>
 
