@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 步驟1：載入react和babel -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- 步驟2：載入根元素(root) -->
+    <div id="root"></div>
+    <script type="text/babel">
+        // 建立圖片元件
+        // 元件名稱字首大寫
+        function GetImg(props) {
+            // 元件中必須要有回傳值
+            return (
+                <img src={props.imgUrl} alt="" title={props.title} style={{
+                    width: "300px",
+                    height: "200px",
+                    objectFit: "cover",
+                    border: "solid 1px black"
+                }} />
+            )
+        }
+
+        // 步驟3：建立React元件
+        function App() {
+            // JSX寫法
+            return <>
+                <div>
+                    <h2>呼叫圖片元件</h2>
+                    {/*呼叫元件：擇其一*/}
+                    {/*<GetImg></GetImg>*/}
+                    {/*使用自訂屬性名稱傳值給元件*/}
+                    {/*元件使用props接收*/}
+                    <GetImg imgUrl="../images/child-3045207_1280.jpg" title="圖1"/>
+                    <GetImg imgUrl="../images/boy-4468350_1280.jpg" title="圖2"/>
+
+                    {/*沒有元件化的方法*/}
+                    <img src="../images/girl-477015_1280.jpg" alt="" style={{
+                        width: "300px",
+                        height: "200px",
+                        objectFit: "cover",
+                        border: "solid 1px black"
+                    }} />
+                </div>
+            </>
+        }
+        // 步驟4：渲染(顯示)App元件到根元件(root)上
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>

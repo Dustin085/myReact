@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 步驟1：載入react和babel -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- 載入Bootstrap -->
+    <script src="./js/vendor.js"></script>
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="./css/all.css.map">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            column-gap: 25px;
+        }
+
+        .card-list {
+            display: flex;
+            column-gap: 25px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            margin-top: 25px;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 步驟2：載入根元素(root) -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // 製作卡片元件
+        function BootstrapCard(props) {
+            // console.log(props);
+
+            // 判斷有無年齡資料
+            let ageInfo = "";
+            // if (!props.age) {
+            //     ageInfo = "查無年齡資料";
+            // } else {
+            //     ageInfo = `年齡：${props.age}歲`;
+            // }
+            ageInfo = !props.age ? "查無年齡資料" : `年齡：${props.age}歲`;
+            // 判斷有無姓名資料
+            let nameInfo = "";
+            if (!props.name) {
+                nameInfo = "查無姓名資料";
+            } else {
+                nameInfo = props.name;
+            }
+
+            let cardWidth = ""
+            if (!props.width) {
+                cardWidth = "18rem";
+            } else {
+                cardWidth = props.width;
+            }
+            return <>
+                <div className="card" style={{ width: cardWidth }}>
+                    <img src={props.imgUrl} className="card-img-top" alt="..." />
+                    <div className="card-body">
+                        <h5 className="card-title">{nameInfo}</h5>
+                        <p className="card-text">{ageInfo}</p>
+                        <a href="#" className="btn btn-primary">個人網站</a>
+                    </div>
+                </div>
+            </>
+        }
+
+        // 步驟3：建立React元件
+        function App() {
+            // JSX寫法
+            return <>
+                <div className="wrap">
+                    {/*非元件寫法*/}
+                    <h2>非元件寫法</h2>
+                    <div className="card" style={{ width: "18rem" }}>
+                        <img src="../images/child-3045207_1280.jpg" className="card-img-top" alt="..." />
+                        <div className="card-body">
+                            <h5 className="card-title">Card title</h5>
+                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" className="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <h2>元件寫法</h2>
+                    <div className="card-list">
+                        {/*元件寫法*/}
+                        <BootstrapCard imgUrl="../images/child-3045207_1280.jpg" name="寶寶" age="0.5" width="18rem" />
+                        <BootstrapCard imgUrl="../images/guitar-3611900_1920.jpg" width="18rem" />
+                        <BootstrapCard imgUrl="../images/girl-477015_1280.jpg" name="養狗的女孩" age="5" />
+                    </div>
+                </div>
+
+            </>
+        }
+        // 步驟4：渲染(顯示)App元件到根元件(root)上
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+
+        // 測試用
+        export default BootstrapCard;
+    </script>
+</body>
+
+</html>
