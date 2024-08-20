@@ -5,7 +5,12 @@
   <title>版型建立</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
+  <!-- bootstrap -->
   <script src="./js/vendor.js"></script>
+  <link rel="stylesheet" href="./css/all.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+  <!-- React -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -24,10 +29,76 @@
         </div>
 
         <div id="root"></div>
-        <script type="text/babel">          
+        <script type="text/babel">
+          function Card(props) {
+            // 資料解構：把物件或陣列內容提出來給指定的變數(必須是被解構的來源是存在的屬性名稱)
+            const { title, price, desc, btnName } = props;
+
+            // 判斷價格是否為數字，若不是則直接顯示
+            let priceInfoEle = <></>;
+            if (isNaN(Number(props.price))) {
+              priceInfoEle = <h1 className="card-title">{props.price}</h1>;
+            } else {
+              priceInfoEle = <h1 className="card-title">${props.price}<small>/月</small></h1>;
+            }
+            // 若沒輸入值，則顯示沒有價格資訊
+            if (!props.price) {
+              priceInfoEle = <h1 className="card-title">沒有價格資訊</h1>;
+            }
+
+            // 判斷價格是否為數字，若不是則直接顯示
+            let priceInfo = <></>;
+            if (isNaN(Number(props.price))) {
+              priceInfo = props.price;
+            } else {
+              priceInfo = <>${props.price}<small>/月</small></>;
+            }
+            // 若沒輸入值，則顯示沒有價格資訊
+            if (!props.price) {
+              priceInfo = <>沒有價格資訊</>;
+            }
+
+            return <>
+              <div className="card mb-4">
+                <div className="card-header">
+                  {/*沒資料解構*/}
+                  <h4 className="my-0">{props.title}</h4>
+                  {/*有資料解構*/}
+                  <h4 className="my-0">{title}</h4>
+                </div>
+                <div className="card-body">
+                  {/*方法一*/}
+                  {priceInfoEle}
+                  {/*方法二*/}
+                  <h1 className="card-title">{priceInfo}</h1>
+                  {/*方法三*/}
+                  {/*三元運算子*/}
+                  {/*條件式 ? 條件成立 : 條件不成立*/}
+                  <h1 className="card-title">
+                    {
+                      isNaN(Number(props.price)) ? props.price : <>${props.price}<small>/月</small></>
+                    }
+                  </h1>
+                  <p>{props.desc}</p>
+                  <button type="button" className="btn btn-outline-primary">{props.btnName}</button>
+                </div>
+              </div>
+            </>
+          }
           const App = () => {
             return (
               <>
+                <h2>租用方案</h2>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore molestiae
+                  facere asperiores sit aspernatur laboriosam ipsum, excepturi fuga,
+                  consequuntur cupiditate, nam a doloremque error adipisci nulla reiciendis
+                  itaque odio voluptatibus.
+                </p>
+                {/*呼叫卡片元件*/}
+                <Card title="基本版" price="1000" desc="基本版說明區" btnName="免費試用" />
+                <Card title="進階版" price="6000" desc="進階版說明區" btnName="進階版申請" />
+                <Card title="企業版" price="請洽客服" desc="多人適用" btnName="企業版申請" />
               </>
             );
           };
@@ -81,8 +152,7 @@
 
     </div>
   </div>
-  <link rel="stylesheet" href="./css/all.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
 </body>
 
 </html>

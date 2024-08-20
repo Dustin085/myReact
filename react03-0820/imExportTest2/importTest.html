@@ -8,26 +8,22 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- 匯入某個檔案 -->
+    <script src="./exportReactCom.js" type="text/babel"></script>
 </head>
 
 <body>
-    <!-- 步驟2：載入根元素(root) -->
     <div id="root"></div>
-    <script type="module" src="">
-        import BootstrapCard from "./exportTest.js";
-        console.log(BootstrapCard);
-        console.log("im");
-        </script>
     
     <script type="text/babel">
-        import BootstrapCard from "./exportTest.js";
-        
+
+        // import/export這個方法沒辦法在text/babel類型上使用，這個方法只能js對js，要在babel上用的話需要在node環境
+        // import { HelloReact } from "./exportReactCom.js";
         function App() {
             return <>
-                
+                <HelloReact />
             </>
         }
-        // 步驟4：渲染(顯示)App元件到根元件(root)上
         ReactDOM
             .createRoot(document.getElementById("root"))
             .render(<App />);

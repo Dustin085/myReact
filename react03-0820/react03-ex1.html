@@ -65,12 +65,13 @@
                 nameInfo = props.name;
             }
 
-            let cardWidth = ""
+            let cardWidth = "";
             if (!props.width) {
                 cardWidth = "18rem";
             } else {
                 cardWidth = props.width;
             }
+
             return <>
                 <div className="card" style={{ width: cardWidth }}>
                     <img src={props.imgUrl} className="card-img-top" alt="..." />
@@ -115,7 +116,7 @@
             .render(<App />);
 
         // 測試用
-        export default BootstrapCard;
+        // export default BootstrapCard;
     </script>
 </body>
 
