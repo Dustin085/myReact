@@ -6,5 +6,5 @@ function HelloReact() {
     );
 }
 
-
+// 使用babel的時候沒辦法使用import/export，node環境才能使用
 // export { HelloReact };
