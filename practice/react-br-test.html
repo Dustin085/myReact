@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 步驟1：載入react和babel -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 步驟2：載入根元素(root) -->
+    <div id="root"></div>
+
+    <script>
+        // let milk = "";
+        // let cola = "";
+        // let foods = [milk, cola];
+        // foods[i].src;
+        // let btns = [btn1, btn2, btn3];
+        // for (let i = 0; i < btns.length; i++) {
+        //     foods[i].onclick = function () {
+        //         foods[i].src = "要變的圖的url";
+        //     }
+        // }
+
+    </script>
+    <script type="text/babel">
+        
+        let textContent = ["你好", <br />, <br />, "你很好"];
+        // 步驟3：建立React元件
+        function App() {
+            return <>
+                <p className="myP">你好 <br />你好好</p>
+                <p>{textContent}</p>
+            </>
+        }
+        // 步驟4：渲染(顯示)App元件到根元件(root)上
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+    <script>
+        console.log(document.querySelector(".myP"));
+        
+    </script>
+</body>
+
+</html>
