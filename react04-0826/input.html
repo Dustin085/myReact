@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <h2>原生js</h2>
+    <input type="text" id="input" value="abc">
+    <!-- 原生JS -->
+    <script>
+        const inputEle = document.getElementById("input");
+        // change事件，unfocus時才會觸發
+        inputEle.addEventListener("change", function () {
+            console.log("change:" + this.value);
+            // console.log("change");
+        });
+        // keyup事件，按鍵放開時觸發
+        inputEle.addEventListener("keyup", function (ev) {
+            console.log("this.value:" + this.value);
+            console.log("ev.target.value:" + ev.target.value);
+            // console.log("keyup");
+        });
+    </script>
+    <hr>
+    <h2>React</h2>
+    <!-- React -->
+    <!-- input綁定useState -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // 從React中解構出useState
+        const { useState } = React;
+        function App() {
+            const [text, setText] = useState("");
+            // JSX寫法
+            return <>
+                {/*React環境下不可以直接使用value*/}
+                {/*<input type="text" id="inputReact" value="abc" />*/}
+                {/*React環境下若要使用原生的value，使用defaultValue*/}
+                {/*若要使用value，需要搭配onChange*/}
+                <input type="text" id="inputReact" value={text}
+                    onChange={(ev) => {
+                        // console.log(ev.target.value);
+                        setText(ev.target.value);
+                    }}
+                    // 焦點離開
+                    onBlur={(ev) => {
+                        console.log("onBlur");
+                        console.log(text);
+                    }}
+                    // 取得焦點
+                    onFocus={(ev) => {
+                        console.log("onFocus");
+                    }}
+                />
+                {/*顯示文字方塊內容*/}
+                <p>{text}</p>
+            </>
+        }
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>

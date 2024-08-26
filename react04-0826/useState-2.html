@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 載入react和babel -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // 建立一個搜尋功能
+        // #1 取出useState方法
+        const { useState } = React;
+
+        // #5 建立一個搜尋元件
+        // 建立元件的語法
+        /*
+        const SearchBox = () => {
+            return <>
+
+            </>
+        }
+        */
+        function SearchBox({ text, onSearchHandler }) {
+            return <>
+                <label htmlFor="search">搜尋</label>
+                <input type="text"
+                    id="search"
+                    className=""
+                    value={text}
+                    onChange={onSearchHandler} />
+            </>
+        }
+        function App() {
+            // #2 定義狀態
+            const [text, setText] = useState("請輸入任何字");
+            // #3 建立一個更新資料的函式
+            const onSearchHandler = (ev) => {
+                setText(ev.target.value);
+            }
+            // JSX寫法
+            // #4 加上搜尋欄
+            return <>
+                {/*
+                <label htmlFor="search">搜尋</label>
+                <input type="text"
+                    id="search"
+                    className=""
+                    value={text}
+                    onChange={onSearchHandler} />
+                <br />
+                <h4>更新後的文字方塊內容： {text}</h4>
+                <hr />
+                */}
+                {/* #6 渲染SearchBox元件 */}
+                <SearchBox text={text} onSearchHandler={onSearchHandler} />
+                <br />
+                {/* #7檢查更新後的文字方塊內容 */}
+                <h4>更新後的文字方塊內容： {text}</h4>
+            </>
+        }
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>

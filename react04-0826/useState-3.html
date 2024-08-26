@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            display: flex;
+            width: 400px;
+            /* height: 500px; */
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        button {
+            /* width: 50px; */
+            padding: 0 30px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // 查看React
+        // console.log(React);
+        // console.log(ReactDOM);
+
+        // #1 建立useState
+        const { useState } = React;
+        // #2 查看useState
+        // console.log(useState);
+        // #2b 查看useState 只能在元件內運作，否則會出錯
+        // const [text, setText] = useState("Hello");
+
+
+        function App() {
+            // #3 state 是 ReadOnly
+            // #3a 為了讓React知道資料已更新，所以會用另一個方法告知
+            const [num, setNum] = useState(1);
+
+            // #3b 陣列
+            const [arr, setArr] = useState([1, 2, 3, 4, 5]);
+            return <>
+                <div className="box">
+                    <button onClick={() => {
+                        setNum(num - 1);
+                    }}>-1</button>
+                    <h2>{num}</h2>
+                    <button onClick={() => {
+                        setNum(num + 1);
+                    }}>+1</button>
+                </div>
+                <hr />
+                {/* 讀取陣列資料給li */}
+                <ul>
+                    {
+                        // item => 陣列值
+                        // index => 陣列索引編號
+                        arr.map((item, index) => {
+                            return <li key={index}>{item}</li>
+                        })
+                    }
+                </ul >
+                <button onClick={() => {
+                    // 新增資料到陣列最後方
+                    // 這樣寫不行
+                    // setArr(arr.push(6));
+
+                    // 取得陣列中的資料 => ...
+                    // console.log(...arr);
+                    // console.log(arr.length);
+                    // 新增內容到陣列
+                    // setArr(new Array(...arr, 6));
+                    // setArr([...arr, 6]);
+                    setArr([...arr, arr.length + 1]);
+                }}>新增陣列資料</button>
+                <button onClick={() => {
+                    // js寫法
+                    // console.log(arr.pop());
+                    // console.log(arr);
+
+                    // React寫法
+                    // 找到最後一個位置刪除
+                    // console.log(arr.filter((item) => {
+                    //     return item !== arr.length;
+                    // }));
+                    // setArr(arr.filter((item) => {
+                    //     return item !== arr.length;
+                    // }));
+                    setArr(arr.filter((item) => {
+                        return item !== arr[arr.length - 1];
+                    }));
+                }}>移除陣列資料</button>
+            </>
+        }
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>
