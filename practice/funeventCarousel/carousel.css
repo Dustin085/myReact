@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+button{
+    display: block;
+}
+
+.carousel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 50px;
+}
+
+.slide-box {
+    position: relative;
+    width: 1000px;
+    height: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    opacity: 0;
+    transition: .6s;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ctrl-btn-box{
+    display: flex;
+    column-gap: 15px;
+}
+
+.ctrl-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+}
