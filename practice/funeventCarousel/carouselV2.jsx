@@ -1,38 +1,42 @@
 function Carousel() {
-    const { useState } = React;
+    const { useState, useRef, useEffect } = React;
     const [activeSlide, setActiveSlide] = useState(0);
+    // 抓slideBox
+    const slideBox = useRef();
     // Slide元件
-    function Slide({ imgUrl, isActive }) {
-        let className = "slide";
-        if (isActive) {
-            className = "slide active";
-        }
-        return <figure className={className}><img src={imgUrl} alt="" /></figure>
+    function Slide({ imgUrl }) {
+        return <figure className="slide"><img src={imgUrl} alt="" /></figure>
     }
+    // 用來製造slide的陣列
     let slideUrls = ["./images/slide1.jpg",
         "./images/slide2.jpg",
         "./images/slide3.jpg",
         "./images/slide4.jpg",
         "./images/slide5.jpg"]
 
+    // useEffect只能在componet body內使用
+    // 當activeSlide改變時，切換slide的active
+    useEffect(() => {
+        let slideArr = Array.from(slideBox.current.getElementsByClassName("slide"));
+        switchActive(slideArr, activeSlide);
+    }, [activeSlide]);
+
     // 控制按鈕元件
-    function CtrlBtn({ num, isActive }) {
-        let className = "ctrl-btn";
-        if (isActive) {
-            className = "ctrl-btn active";
-        }
-        return <button type="button" className={className} onClick={() => {
+    function CtrlBtn({ num }) {
+        const clickHandler = () => {
+            // 改變slide目標
             setActiveSlide(num);
-        }}></button>
+        };
+        return <button type="button" className="ctrl-btn" onClick={clickHandler}></button>
     }
     let ctrlBtnArr = [1, 2, 3, 4, 5];
 
     return <>
         <div className="carousel">
-            <div className="slide-box">
+            <div className="slide-box" ref={slideBox}>
                 {
                     slideUrls.map((slideUrl, index) => {
-                        return index == activeSlide ? <Slide key={index} imgUrl={slideUrl} isActive /> : <Slide key={index} imgUrl={slideUrl} />
+                        return <Slide key={index} imgUrl={slideUrl} />
                     })
                 }
             </div>
@@ -41,7 +45,7 @@ function Carousel() {
                 <div className="ctrl-btn-box">
                     {
                         ctrlBtnArr.map((key, index) => {
-                            return index == activeSlide ? <CtrlBtn key={key} num={index} isActive /> : <CtrlBtn key={key} num={index} />
+                            return <CtrlBtn key={key} num={index} />
                         })
                     }
                 </div>
@@ -49,4 +53,12 @@ function Carousel() {
             </div>
         </div>
     </>
+    // 切換active元素
+    function switchActive(arrToSwitch, targetIndex) {
+        arrToSwitch.forEach((arrEle) => {
+            arrEle.classList.remove('active');
+        });
+        arrToSwitch[targetIndex].classList.add('active');
+        // console.log("switched");
+    }
 }
