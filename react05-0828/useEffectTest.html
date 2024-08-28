@@ -8,20 +8,28 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="./carousel.jsx" type="text/babel"></script>
-    <link rel="stylesheet" href="./carousel.css">
+    <style>
+        button{
+            transition: 5s;
+        }
+    </style>
 </head>
 
 <body>
     <div id="root"></div>
 
     <script type="text/babel">
-
         function App() {
+            const { useEffect } = React;
+            useEffect(() => {
+                let myBtn = document.getElementById("myBtn");
+                myBtn.onclick = () => {
+                    myBtn.setAttribute("style", "background-color: red");
+                }
+            }, []);
             // JSX寫法
             return <>
-                <h2>CarouselV1</h2>
-                <Carousel />
+                <button id="myBtn">CLICK</button>
             </>
         }
         ReactDOM

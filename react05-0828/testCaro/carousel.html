@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./carousel.jsx" type="text/babel"></script>
+    <link rel="stylesheet" href="./carousel.css">
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+        function App() {
+            const { useEffect } = React;
+            useEffect(() => {
+                // 輪播部分
+                let slideArr = Array.from(document.getElementsByClassName("slide"));
+                let ctrlBtnArr = Array.from(document.getElementsByClassName("ctrl-btn"));
+                ctrlBtnArr.forEach((ctrlBtn, index) => {
+                    ctrlBtn.addEventListener("click", function () {
+                        switchActive(slideArr, index);
+                        switchActive(ctrlBtnArr, index);
+                    });
+                });
+                // 切換active元素
+                function switchActive(arrToSwitch, targetIndex) {
+                    arrToSwitch.forEach((arrEle) => {
+                        arrEle.classList.remove('active');
+                    });
+                    arrToSwitch[targetIndex].classList.add('active');
+                }
+
+                // gotop按鈕
+                $("#go-top-btn").click(() => {
+                    $("html, body").animate({
+                        scrollTop: 0
+                    })
+                });
+            }, []);
+            // JSX寫法
+            return <>
+                <button id="go-top-btn">↑</button>
+                <section id="carousel">
+                    <h2>CarouselV1</h2>
+                    <div className="carousel">
+                        <div className="slide-box">
+                            <figure className="slide active"><img src="./images/slide1.jpg" alt="" /></figure>
+                            <figure className="slide"><img src="./images/slide2.jpg" alt="" /></figure>
+                            <figure className="slide"><img src="./images/slide3.jpg" alt="" /></figure>
+                            <figure className="slide"><img src="./images/slide4.jpg" alt="" /></figure>
+                            <figure className="slide"><img src="./images/slide5.jpg" alt="" /></figure>
+                        </div>
+                        <div className="ctrl-box">
+                            <button type="button" className="arrow arrow--prev" id="caro-prev-btn"></button>
+                            <div className="ctrl-btn-box">
+                                <button type="button" className="ctrl-btn" ></button>
+                                <button type="button" className="ctrl-btn" ></button>
+                                <button type="button" className="ctrl-btn" ></button>
+                                <button type="button" className="ctrl-btn" ></button>
+                                <button type="button" className="ctrl-btn" ></button>
+                            </div>
+                            <button type="button" className="arrow arrow--next" id="caro-next-btn"></button>
+                        </div>
+                    </div>
+                </section>
+            </>
+        }
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>
