@@ -78,7 +78,6 @@
                         const currentPage = useRef(1);
 
 
-
                         const onSearchHandler = (e) => {
                             // 查看事件觸發時的相關資訊，裡面有ctrlKey=false，shiftKey=false
                             // console.log(e);
@@ -101,7 +100,7 @@
                                 // 加入關鍵字(query)
                                 const result = await axios.get(`${api}?client_id=${accessKey}&query=${filterString}&page=${page}`);
                                 // console.log(result);
-                                console.log("page: " + page);
+                                // console.log("page: " + page);
                                 // #3b 更新列表 => 將發出請求的結果更新到列表陣列
                                 // setJsonData(result.data.results);
                                 setJsonData((preData) => {
@@ -126,29 +125,15 @@
                             }
                         }
 
-                        // #1 建立非同步方法時，會因為渲染的關係不斷重複觸發
-                        // 此方法會造成限定次數很快就被用完
-
-                        // const getPhotos = async () => {
-                        //     // 手寫程式測試是否能成功連上api，網址中參數放在?之後，第二個參數放在&之後
-                        //     // console.log(`${api}?client_id=${accessKey}&query=cat`);
-
-                        //     const result = await axios.get(`${api}?client_id=${accessKey}&query=${filterString}`);
-                        //     console.log(result);
-                        // }
-                        // getPhotos();
-
-                        // useEffect(() => {
-                        //     console.log("Effect:isLoading:", isLoading);
-                        //     console.log("Effect:!isLoading", !isLoading);
-                        // }, [isLoading]);
-
-
                         // #2 useEffect
                         // 建立一個列表高度，預設為空值，滑鼠滾動時會產生變化
                         const listRef = useRef(null);
                         useEffect(() => {
                             getPhotos(1, true);
+                            // useEffect第二個參數是[]時，只在第一次初始化時執行
+                        }, [filterString]);
+
+                        useEffect(() => {
                             // 建立滾動監聽函式
                             const ScrollEvent = () => {
                                 // 垂直捲動位置
@@ -180,10 +165,12 @@
                             return () => {
                                 window.removeEventListener("scroll", ScrollEvent);
                             };
+                        }, [isLoading]);
 
-
-                            // useEffect第二個參數是[]時，只在第一次初始化時執行
-                        }, [filterString]);
+                        // 接收到data以後把isLoading狀態改為false
+                        useEffect(() => {
+                            setIsLoading(false);
+                        }, [jsonData]);
 
                         return (<div>
                             {/*console.log(2)*/}

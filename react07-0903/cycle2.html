@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./jQuery/lightbox/css/lightbox.min.css">
+    <style>
+        .wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .imgCycle-box {
+            position: relative;
+            width: 750px;
+            height: 500px;
+        }
+
+        /* 輪播導覽列 */
+        #nav {
+            position: absolute;
+            right: 20px;
+            bottom: 10px;
+            z-index: 99;
+            display: flex;
+            justify-content: space-between;
+            column-gap: 5px;
+        }
+        #nav a{
+            display: block;
+            width: 48px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            background-color: rgba(240, 255, 255, 0.6);
+            text-decoration: none;
+            color: black;
+            font-size: 24px;
+            font-weight: 700;
+            border-radius: 50%;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            transition: .6s;
+        }
+        
+        #nav a.activeSlide{
+            background-color: rgba(139, 177, 177, 0.8);
+        }
+        
+        #imgCycle {
+            width: 750px;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useEffect } = React;
+        // 撰寫jQuery
+        // jQuery環境一般寫法
+        // $(document).ready(function () {
+
+        // });
+        // jQuery環境簡寫
+        // $(function () {
+        //     $("#imgCycle").cycle();
+        // });
+
+
+
+        function App() {
+            useEffect(() => {
+                $(function () {
+                    $("#imgCycle").after("<div id='nav'></div>").cycle({
+                        // 輪播方式
+                        fx: 'fade',
+                        // 輪播速度
+                        timeout: 500,
+                        // 第一張圖停留的時間
+                        // delay: 2000
+                        // 執行已建立好的css樣式
+                        pager: "#nav",
+                    });
+                });
+            }, []);
+            return <>
+                <div class="wrap">
+                    <h1>自動輪播</h1>
+                    <div class="imgCycle-box">
+                        <div id="imgCycle">
+                            <img src="./jQuery/images/cuteBaby.jpg" alt="" />
+                            <img src="./jQuery/images/boy1.jpg" alt="" />
+                            <img src="./jQuery/images/girl1.jpg" alt="" />
+                            <img src="./jQuery/images/girl2.jpg" alt="" />
+                            <img src="./jQuery/images/guitar1.jpg" alt="" />
+                        </div>
+                        {/*<nav class="cycle-ctrl-btn-box"></nav>*/}
+                    </div>
+
+                </div>
+            </>
+        }
+
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+    <!-- jQuery -->
+    <script src="./jQuery/js/jquery-1.11.3.min.js"></script>
+    <!-- lightbox套件的js -->
+    <script src="./jQuery/js/jquery.cycle.all.js"></script>
+</body>
+
+</html>

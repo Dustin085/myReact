@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        function App() {
+            const { useState, useRef } = React;
+            const [stateCount, setStateCount] = useState(0);
+            // useRef不會重新渲染元件
+            const refCount = useRef(0);
+            const renderCount = useRef(0);
+            
+            const addStateCount = () => {
+                setStateCount(stateCount + 1);
+            };
+            const addRefCount = () => {
+                refCount.current = refCount.current + 1;
+            };
+
+            renderCount.current += 1;
+            console.log("App render count: " + renderCount.current);
+            return <>
+                <ShowCount stateCount={stateCount} refCount={refCount} />
+                <h1>stateCount={stateCount}, refCount={refCount.current}</h1>
+                <button onClick={addStateCount}>add stateCount</button>
+                <button onClick={addRefCount}>add refCount</button>
+            </>
+        }
+
+        function ShowCount({ stateCount, refCount }) {
+            console.log("ShowCount render");
+            return <h1>stateCount={stateCount}, refCount={refCount.current}</h1>
+        }
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>
