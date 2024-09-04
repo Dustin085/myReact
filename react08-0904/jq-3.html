@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./jQuery/lightbox/css/lightbox.min.css">
+    <style>
+        .wrap {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        a {
+            color: red;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .ttpShow {
+            display: none;
+        }
+
+        #ttpPanel {
+            border: solid 3px rgb(224, 214, 227);
+            padding: 10px;
+            text-align: left;
+            background-color: rgb(250, 245, 251);
+            position: absolute;
+            z-index: 99;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useEffect } = React;
+
+        function App() {
+            useEffect(() => {
+                // 滑鼠事件
+                // 移入 => mouseover()
+                // 移動 => mousemove()
+                // 移出 => mouseout()
+
+                // 座標x => pageX
+                // 座標y => pageY
+
+                // 淡入 => fadeIn()
+                // 淡出 => fadeOut()
+                // 速度 => 可以使用秒數或者參數(slow, normal, fast)
+                // 傳回被找到的資訊 => has()
+
+                $("a:has(.ttpShow)").mouseover(function (ev) {
+                    $("body").append("<div id='ttpPanel'>" + $(this).children(".ttpShow").html() + "</div>");
+                    $("#ttpPanel").css({
+                        top: (ev.pageY + 10) + "px",
+                        left: (ev.pageX + 10) + "px"
+                    }).fadeIn("fast");
+                }).mousemove(function (ev) {
+                    $("#ttpPanel").css({
+                        top: (ev.pageY + 10) + "px",
+                        left: (ev.pageX + 10) + "px"
+                    })
+                }).mouseout(function(){
+                    $("#ttpPanel").remove();
+                });
+
+                // $("a").has(".ttpShow").mouseover(function (ev) {
+                //     // 滑鼠碰到有ttpShow的超連結時
+                //     $(this).find(".ttpShow").css({
+                //         top: (ev.pageY + "px"),
+                //         left: (ev.pageX + "px")
+                //     }).fadeIn("fast");
+                // }).mousemove(function (ev) {
+                //     // 滑鼠移動時
+                //     $(this).find(".ttpShow").css({
+                //         top: (ev.pageY + "px"),
+                //         left: (ev.pageX + "px")
+                //     }).fadeIn("fast");
+                // }).mouseout(function (ev) {
+                //     // 滑鼠離開時
+                //     $(".ttpShow").stop().fadeOut("fast");
+                // });
+
+            }, []);
+            return <>
+                <div class="wrap">
+                    <h1>toolTip效果-使用滑鼠方法</h1>
+                    <p>Lorem ipsum dolor sit amet <a href="#">consectetur<span className="ttpShow">說明說明</span></a>, adipisicing elit. Quas beatae, quisquam odit aliquid dolorum molestias natus minus quae saepe atque ducimus at hic in sed <a href="#">consequuntur<span className="ttpShow">說明說明222</span></a> officia, repellendus perferendis odio.</p>
+                </div>
+            </>
+        }
+
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+    <!-- jQuery -->
+    <script src="./jQuery/js/jquery-1.11.3.min.js"></script>
+</body>
+
+</html>

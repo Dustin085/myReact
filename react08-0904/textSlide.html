@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./jQuery/css/textslider.css">
+    <style>
+        .slideText {
+            height: 2rem;
+            /*1rem 大約為 16px*/
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useEffect } = React;
+
+        function App() {
+            useEffect(() => {
+                $(function () {
+                    $(".slideText").textslider({
+                        direction: 'scrollUp', // 捲動方向: scrollUp向上, scrollDown向下
+                        scrollNum: 3, // 一次捲動幾個<li>
+                        scrollSpeed: 300, // 捲動速度(ms)
+                        pause: 500  // 停頓時間(ms)
+                    });
+                });
+            }, []);
+            return <>
+                <div class="wrap">
+                    <h1>文字輪播</h1>
+                    <div class="slideText">
+                        <ul>
+                            <li>News1</li>
+                            <li>News2</li>
+                            <li>News3</li>
+                            <li>News4</li>
+                            <li>News5</li>
+                            <li>News6</li>
+                            <li>News7</li>
+                            <li>News8</li>
+                            <li>News9</li>
+                        </ul>
+                    </div>
+                </div>
+            </>
+        }
+
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+    <!-- jQuery -->
+    <script src="./jQuery/js/jquery-1.11.3.min.js"></script>
+    <!-- 文字輪播主程式 -->
+    <script src="./jQuery/js/jquery.textslider.js"></script>
+</body>
+
+</html>
