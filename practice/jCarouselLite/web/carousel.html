@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首頁下輪播測試</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function CarouselCardItem({
+            title = "【活動講座】繪本辦桌秀一下!親子活動-台中國家歌劇院",
+            imgUrl = "./assets/images/demo-event-pic/for-bot-caro-pic1.jpg" }) {
+            return <>
+                <a href="./event/event.html" className="carousel-card">
+                    <figure className="fig"><img src={imgUrl} alt="" /></figure>
+                    <h3 className="title">{title}</h3>
+                </a>
+            </>
+        }
+
+        function App() {
+            let slideInfoJson = [
+                {
+                    "title": "【活動講座】繪本辦桌秀一下!親子活動-台中國家歌劇院",
+                    "imgUrl": "./images/for-bot-caro-pic1.jpg"
+                },
+                {
+                    "title": "【運動講座】: 親子動一動，小小運動會- YYsports",
+                    "imgUrl": "./images/for-bot-caro-pic2.jpg"
+                },
+                {
+                    "title": "【假日限定】2024FUN出大能力親子永續派對- 中興文化創意園區",
+                    "imgUrl": "./images/for-bot-caro-pic3.jpg"
+                }
+            ];
+            const { useEffect } = React;
+            useEffect(() => {
+                $(function () {
+                    $(".carousel").jCarouselLite({
+                        // auto: 1200,
+                        // scroll: 2,
+                        // visible: 3,
+                        // speed: 600
+                    });
+                });
+            }, []);
+            return <>
+                <div class="mixedContent">
+                    <div class="carousel">
+                        <ul>
+                            {
+                                slideInfoJson.map((item, index) => {
+                                    const { title, imgUrl } = item;
+                                    return <li key={index}><CarouselCardItem
+                                        key={index}
+                                        title={title}
+                                        imgUrl={imgUrl}
+                                    /></li>
+                                })
+                            }
+                        </ul>
+                    </div >
+                </div>
+            </>
+        }
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+
+    <!-- JQ -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- jCarouselLite -->
+    <script src="./js/jquery.jcarousellite-1.0.1.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./jQuery/lightbox/css/lightbox.min.css">
+    <style>
+        .wrap {
+            /* display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; */
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        #container {
+            margin: 0 auto;
+        }
+
+        .box {
+            width: 400px;
+            margin-bottom: 25px;
+        }
+
+        .box img {
+            width: 100%;
+            /* vertical-align: bottom; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useEffect } = React;
+
+        function App() {
+            useEffect(() => {
+                $(function () {
+                    $("#container").imagesLoaded(function () {
+                        $("#container").masonry({
+                            isFitWidth: true,
+                            gutter: 25
+                        });
+                    });
+                });
+            }, []);
+            return <>
+                <div class="wrap">
+                    <h1>瀑布流</h1>
+                    <div id="container">
+                        <div class="box">
+                            <img src="./jQuery/images/cuteBaby.jpg" alt="" />
+                        </div>
+                        <div class="box">
+                            <img src="./jQuery/images/boy1.jpg" alt="" />
+                        </div>
+                        <div class="box">
+                            <img src="./jQuery/images/girl1.jpg" alt="" />
+                        </div>
+                        <div class="box">
+                            <img src="./jQuery/images/girl2.jpg" alt="" />
+                        </div>
+                        <div class="box">
+                            <img src="./jQuery/images/guitar1.jpg" alt="" />
+                        </div>
+                        <div class="box">
+                            <img src="./jQuery/images/cuteBaby.jpg" alt="" />
+                        </div>
+                        <div class="box">
+                            <img src="./jQuery/images/boy1.jpg" alt="" />
+                        </div>
+                        <div class="box">
+                            <img src="./jQuery/images/girl1.jpg" alt="" />
+                        </div>
+                        <div class="box">
+                            <img src="./jQuery/images/girl2.jpg" alt="" />
+                        </div>
+                        <div class="box">
+                            <img src="./jQuery/images/guitar1.jpg" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </>
+        }
+
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+    <!-- jQuery -->
+    <script src="./jQuery/js/jquery-1.11.3.min.js"></script>
+    <!-- 載入圖片主程式 -->
+    <script src="./jQuery/js/imagesloaded.pkgd.min.js"></script>
+    <!-- 瀑布流主程式 -->
+    <script src="./jQuery/js/masonry.pkgd.min.js"></script>
+</body>
+
+</html>
