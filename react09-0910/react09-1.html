@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖片篩選 - jQuery版本</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul li {
+            list-style-type: none;
+        }
+
+        #wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 50px;
+            padding-top: 80px;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            color: black;
+        }
+
+        #filterBtn {
+            display: flex;
+            column-gap: 30px;
+        }
+
+        #filterBtn a {
+            padding: 5px 20px;
+            background-color: aliceblue;
+            border: solid 1px black;
+            border-radius: 10px;
+            transition: .35s;
+        }
+
+        #filterBtn a.active {
+            background-color: rgb(144, 162, 177);
+        }
+
+        #filterBtn a:hover {
+            background-color: rgb(196, 207, 217);
+        }
+
+        #filterList ul {
+            max-width: 800px;
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 10px;
+            column-gap: 10px;
+        }
+
+        #filterList ul li img {
+            width: 150px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function App() {
+            const { useEffect } = React;
+            useEffect(() => {
+                $(function () {
+                    // 取得超連結按鈕
+                    let filterBtns = $("#filterBtn a");
+                    // 取得列表中的li
+                    let listItem = $("#filterList ul li");
+
+                    filterBtns.click(function () {
+                        // 改變按鈕的active
+                        filterBtns.removeClass("active");
+                        $(this).addClass("active");
+                        // 切換顯示listItem
+                        let btnClassName = $(this).attr("class");
+                        listItem.each((index, item) => {
+                            // 如果按鈕是allItem，全部顯示
+                            if (btnClassName.includes("allItem")) {
+                                $(item).show();
+                                // 全部顯示並且跳過之後的程式碼
+                                return;
+                            }
+
+                            if (btnClassName.includes($(item).attr("class"))) {
+                                $(item).show();
+                            } else {
+                                $(item).hide();
+                            }
+                        })
+                    });
+
+                    // 載入頁面時，自動點擊allBtn
+                    $("#filterBtn .allItem").click();
+                });
+
+
+            }, []);
+            return <>
+                <div id="wrap">
+                    {/* 按鈕區 */}
+                    <div id="filterBtn">
+                        <a href="#" className="allItem">ALL</a>
+                        <a href="#" className="cats">CATS</a>
+                        <a href="#" className="food">FOOD</a>
+                        <a href="#" className="view">VIEW</a>
+                    </div>
+                    {/* 圖片列表區 */}
+                    <div id="filterList">
+                        <ul>
+                            <li className="view"><img src="./images/view1.jpg" alt="" /></li>
+                            <li className="view"><img src="./images/view2.jpg" alt="" /></li>
+                            <li className="view"><img src="./images/view3.jpg" alt="" /></li>
+                            <li className="view"><img src="./images/view4.jpg" alt="" /></li>
+                            <li className="cats"><img src="./images/cats1.jpg" alt="" /></li>
+                            <li className="cats"><img src="./images/cats2.jpg" alt="" /></li>
+                            <li className="cats"><img src="./images/cats3.jpg" alt="" /></li>
+                            <li className="cats"><img src="./images/cats4.jpg" alt="" /></li>
+                            <li className="cats"><img src="./images/cats5.jpg" alt="" /></li>
+                            <li className="cats"><img src="./images/cats6.jpg" alt="" /></li>
+                            <li className="food"><img src="./images/food1.jpg" alt="" /></li>
+                            <li className="food"><img src="./images/food2.jpg" alt="" /></li>
+                            <li className="food"><img src="./images/food3.jpg" alt="" /></li>
+                            <li className="food"><img src="./images/food4.jpg" alt="" /></li>
+                            <li className="food"><img src="./images/food5.jpg" alt="" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </>
+        }
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>

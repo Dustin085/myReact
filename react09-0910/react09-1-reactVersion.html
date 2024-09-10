@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖片篩選 - React版本</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul li {
+            list-style-type: none;
+        }
+
+        #wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 50px;
+            padding-top: 80px;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            color: black;
+        }
+
+        #filterBtn {
+            display: flex;
+            column-gap: 30px;
+        }
+
+        #filterBtn a {
+            padding: 5px 20px;
+            background-color: aliceblue;
+            border: solid 1px black;
+            border-radius: 10px;
+            transition: .35s;
+        }
+
+        #filterBtn a.active {
+            background-color: rgb(144, 162, 177);
+        }
+
+        #filterBtn a:hover {
+            background-color: rgb(196, 207, 217);
+        }
+
+        #filterList ul {
+            max-width: 800px;
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 10px;
+            column-gap: 10px;
+        }
+
+        #filterList ul li img {
+            width: 150px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function App() {
+            const { useState, useEffect, useRef } = React;
+            const [imgList, setImgList] = useState([]);
+            // 一開始獲得的圖片資料
+            const imgListData = useRef([
+                {
+                    category: "view",
+                    url: "./images/view1.jpg"
+                },
+                {
+                    category: "view",
+                    url: "./images/view2.jpg"
+                },
+                {
+                    category: "view",
+                    url: "./images/view3.jpg"
+                },
+                {
+                    category: "view",
+                    url: "./images/view4.jpg"
+                },
+                {
+                    category: "cats",
+                    url: "./images/cats1.jpg"
+                },
+                {
+                    category: "cats",
+                    url: "./images/cats2.jpg"
+                },
+                {
+                    category: "cats",
+                    url: "./images/cats3.jpg"
+                },
+                {
+                    category: "cats",
+                    url: "./images/cats4.jpg"
+                },
+                {
+                    category: "cats",
+                    url: "./images/cats5.jpg"
+                },
+                {
+                    category: "cats",
+                    url: "./images/cats6.jpg"
+                },
+                {
+                    category: "food",
+                    url: "./images/food1.jpg"
+                },
+                {
+                    category: "food",
+                    url: "./images/food2.jpg"
+                },
+                {
+                    category: "food",
+                    url: "./images/food3.jpg"
+                },
+                {
+                    category: "food",
+                    url: "./images/food4.jpg"
+                },
+                {
+                    category: "food",
+                    url: "./images/food5.jpg"
+                },
+            ]);
+
+            const allBtn = useRef(null);
+            useEffect(() => {
+                // 初始化圖片列表
+                setImgList(imgListData.current);
+
+                allBtn.current.click();
+            }, []);
+
+
+            // 篩選按鈕處理程序
+            const filterBtnClickHandler = (ev) => {
+                // 讀取存在data-category裡面的字串
+                let category = ev.target.dataset.category;
+                let newList = [];
+                if (category === "allItem") {
+                    // 若是全選則讓結果變成一開始得到的data
+                    newList = imgListData.current;
+                } else {
+                    // 若非allItem則回傳篩選過的結果
+                    newList = imgListData.current.filter((item) => {
+                        return item.category === category;
+                    });
+                }
+                setImgList(newList);
+                // 改變按鈕的class
+                let filterBtns = $("#filterBtn a");
+                filterBtns.removeClass("active");
+                $(ev.target).addClass("active");
+            };
+
+            return <>
+                <div id="wrap">
+                    {/* 按鈕區 */}
+                    <div id="filterBtn">
+                        <a href="#" onClick={filterBtnClickHandler} data-category="allItem" ref={allBtn}>ALL</a>
+                        <a href="#" onClick={filterBtnClickHandler} data-category="cats">CATS</a>
+                        <a href="#" onClick={filterBtnClickHandler} data-category="food">FOOD</a>
+                        <a href="#" onClick={filterBtnClickHandler} data-category="view">VIEW</a>
+                    </div>
+                    {/* 圖片列表區 */}
+                    <div id="filterList">
+                        <ul>
+                            {
+                                imgList.map((item, index) => {
+                                    return <li key={index} className={item.category}><img src={item.url} alt="" /></li>
+                                })
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </>
+        }
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>
