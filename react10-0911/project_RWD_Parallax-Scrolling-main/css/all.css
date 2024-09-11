@@ -150,8 +150,8 @@ a {
 
 @media (max-width: 779px) {
   .col-half,
-.col-three-one,
-.col-quarter {
+  .col-three-one,
+  .col-quarter {
     float: none;
     width: 100%;
   }
