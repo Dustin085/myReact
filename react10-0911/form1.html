@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function App() {
+            const { useState } = React;
+            const [inputName, setInputName] = useState("");
+            const cityArr = [
+                "台北市",
+                "新北市",
+                "台中市"
+            ]
+            const [selectedCity, setSelectedCity] = useState("");
+
+            return <>
+                {/* #1 input */}
+                <label htmlFor="username">使用者名稱</label>
+                <input type="text" id="username" value={inputName} onChange={(ev) => {
+                    setInputName(ev.target.value);
+                }} />
+                <br />
+                <p>文字方塊內容: {inputName}</p>
+                {/* #2 select */}
+                <select name="" id="" value={selectedCity} onChange={(ev) => {
+                    setSelectedCity(ev.target.value);
+                }}>
+                    <option value="" disabled>請選擇</option>
+                    {
+                        cityArr.map((city, index) => {
+                            return <option key={index} value={city}>{city}</option>
+                        })
+                    }
+                </select>
+                <p>下拉選單內容: {selectedCity}</p>
+            </>
+        }
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>
