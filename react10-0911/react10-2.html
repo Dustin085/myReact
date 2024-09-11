@@ -52,6 +52,7 @@
             left: 50%;
             z-index: 96;
             transform: translateX(-50%) translateY(-50%);
+            padding: 20px;
             opacity: 0;
         }
 
@@ -71,6 +72,12 @@
             cursor: pointer;
         }
 
+        #contentWrap {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         /* 遮罩元素 */
     </style>
 </head>
@@ -83,16 +90,6 @@
             const { useEffect } = React;
             useEffect(() => {
                 $(function () {
-                    // {/* 動態生成下方的元素 */ }
-                    // {/* 遮罩元素 */ }
-                    // <div id="mdOverlay"></div>
-                    // {/* 彈跳視窗 */ }
-                    // <div id="mdWindow">
-                    //     {/* 關閉按鈕 */}
-                    //     <div className="mdClose">X</div>
-                    //     {/* 被隱藏的內容 */}
-                    //     <div id="contentWrap">內容</div>
-                    // </div>
 
                     let modalBtn = $(".modalBtn");
                     let overlayOpaacity = 0.7;
@@ -107,17 +104,15 @@
                         let setMdw = $(this);
                         // 取得href
                         let setHref = setMdw.attr("href");
-                        // 取得href對應id的內容
-                        let setSource = $(setHref).html();
                         // 取得視窗高度
                         let curHeight = $(window).height();
 
-                        $("body").append('<div id="mdOverlay"></div><div id="mdWindow"><div class="mdClose">X</div><div id="contentWrap">內容</div></div>');
+                        $("body").append('<div id="mdOverlay"></div><div id="mdWindow"><div class="mdClose">X</div><iframe id="contentWrap"></iframe></div>');
 
                         $("#mdOverlay, #mdWindow").css({ display: "block" });
                         $("#mdOverlay").css({ height: "100vh" }).stop().animate({ opacity: overlayOpaacity }, fadeTime);
                         $("#mdWindow").stop().animate({ opacity: 1 }, fadeTime);
-                        $("#contentWrap").html(setSource);
+                        $("#contentWrap").attr("src", setHref);
 
                         $("#mdWindow .mdClose, #mdOverlay").on("click", () => {
                             $("#mdOverlay, #mdWindow").stop().animate({ opacity: 0 }, fadeTime, function () {
@@ -130,7 +125,7 @@
             return <>
                 <div id="wrap">
                     <div className="btnArea">
-                        <a href="#modalContent" className="modalBtn">彈跳視窗</a>
+                        <a href="./modal/modal-iframe.html" className="modalBtn">彈跳視窗</a>
                     </div>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores sed esse, exercitationem aliquid odio fugit ipsa quos velit nulla, dolorem atque. Mollitia aliquid ex debitis nisi iusto incidunt accusamus unde in, soluta est? Praesentium ea illo repellendus obcaecati. Natus ad sequi, totam laboriosam officia veniam exercitationem reprehenderit cupiditate quibusdam provident illo fuga accusantium voluptatibus, itaque fugit nobis eligendi quas ea illum aspernatur possimus mollitia repudiandae iusto! Eos quam accusamus cumque alias iusto, facilis minus dolores eius hic suscipit, nisi a adipisci tempora culpa. Doloremque quo aliquid obcaecati adipisci ea ullam voluptatem similique sequi quibusdam. Porro fugit dolores laboriosam et, saepe ex soluta nostrum voluptas ea. Amet dicta incidunt voluptas impedit, aliquam ipsam nam molestiae distinctio quibusdam laboriosam corporis explicabo at iste. Ea dignissimos nisi minima distinctio exercitationem nesciunt eligendi esse quae eveniet numquam odit quam tempora saepe, consequatur et aut quia quibusdam quaerat adipisci sint corrupti iure explicabo? Neque blanditiis quis, quod corporis magni enim fuga similique voluptatum, nam quia illum iure deleniti, porro quasi molestias quidem quae at provident. Beatae enim aspernatur voluptatibus, molestias delectus facere voluptatum error necessitatibus. Recusandae quasi veritatis voluptas quisquam eos enim quo natus ad dolores, animi optio inventore eligendi, delectus voluptates soluta! Ducimus nam ratione recusandae officiis quod nisi nulla illo fuga! Ipsum illum iusto labore sunt provident veniam at, modi dolorem aspernatur ad enim, quam culpa illo ullam corrupti esse nobis officiis magni voluptatibus quibusdam ab. Assumenda sapiente praesentium laboriosam. Architecto esse delectus deserunt reiciendis quo maiores error harum nobis, facilis perspiciatis aperiam. Tempora omnis adipisci, necessitatibus a error pariatur consequatur illum iusto exercitationem rem nihil natus. Repellat consectetur architecto ratione deserunt libero eaque vel adipisci enim excepturi, sunt modi qui, accusantium dolorem cum autem pariatur quia dolorum! Assumenda amet a quam sunt explicabo consequuntur nobis repellendus temporibus quae accusantium. Nulla sed quos distinctio temporibus accusamus alias, earum amet repudiandae architecto ipsa dolor obcaecati atque vel similique, non corporis nesciunt! Vel nemo quibusdam unde inventore sunt cum? Similique quibusdam odio, aperiam voluptatem perspiciatis sequi veritatis, asperiores fuga non repellendus magni dolorem deleniti amet maxime quaerat impedit, laborum unde quod blanditiis error. Exercitationem unde laborum tenetur. Molestiae, tempora dolorem, inventore velit doloribus maxime voluptates quod, atque eligendi ipsam blanditiis amet perferendis quasi sapiente harum quae eos doloremque pariatur esse fugiat deserunt aperiam voluptatum ad? Laudantium deserunt incidunt accusantium veniam voluptatum quis cum autem culpa velit ex dolores nobis ratione in rem reiciendis repudiandae aliquam nostrum, quam labore tenetur! Accusantium amet rerum aliquid unde quam, praesentium officia obcaecati nihil. Harum facere eveniet cum maxime ab similique aliquam, quibusdam adipisci voluptatibus laudantium voluptates culpa non beatae! Autem temporibus delectus perspiciatis saepe corporis. Praesentium quam necessitatibus, veniam cum ducimus, iure facilis veritatis ipsa obcaecati dicta qui pariatur nemo ratione fugiat reiciendis dolorum libero minima ad in. Voluptatum, similique voluptas dolor veritatis maiores vitae atque eius accusantium deserunt magni, molestiae cumque, autem possimus dolorum. Molestias dolorem quas, molestiae qui necessitatibus tenetur dignissimos quis laborum voluptatibus libero nostrum illum inventore, ipsum exercitationem in quaerat alias nobis ab sint officia, adipisci veniam recusandae. Quod omnis impedit animi optio deleniti qui iusto exercitationem voluptatibus expedita sapiente praesentium aliquid quidem nobis eius minus sint libero error numquam sequi facilis, modi, provident mollitia possimus. Ipsam et reiciendis blanditiis beatae provident, maiores voluptas! Vitae earum consequuntur doloremque ipsum quis modi reprehenderit quidem reiciendis quae inventore, voluptates incidunt perferendis nam! Cumque itaque voluptatibus ut cum voluptate id dolore labore necessitatibus dicta, eos aperiam facere? Reprehenderit, officiis at facere consectetur nesciunt alias quae praesentium beatae suscipit. Dicta corrupti quisquam eligendi asperiores quis totam ullam incidunt omnis facere autem beatae aspernatur quibusdam magni dolores eveniet, necessitatibus ipsum earum fugiat maxime? Consequatur, quaerat repellendus aperiam, facilis odio natus, est deleniti quasi quas numquam inventore provident architecto deserunt omnis nemo quisquam! Illo doloremque nihil harum natus quae eaque cupiditate, pariatur sed nesciunt corrupti sequi blanditiis est architecto iusto, at ipsum minima deserunt optio delectus expedita accusantium facere minus ab qui? Laudantium ratione impedit est quibusdam et eum deleniti, quia necessitatibus inventore voluptatibus rem repellat, quidem fugit facere minima expedita, optio cum labore cupiditate nobis numquam consectetur earum! Velit tempora aperiam, aut, vitae sequi quibusdam atque voluptate doloribus quisquam facilis repudiandae libero adipisci corporis error ad dolore sapiente. Error rem ipsam tenetur aliquam enim corporis cumque unde quia impedit, sit quos. Nam a quam eius itaque atque eveniet ea praesentium necessitatibus similique, consequuntur molestiae vitae quidem repellendus. Mollitia nemo saepe error reiciendis quos possimus perferendis, laudantium vel, nisi officiis aliquam tempora harum quas. Ipsum facilis iure praesentium, vero placeat adipisci magnam beatae repellendus, doloribus aspernatur soluta impedit! Adipisci sequi accusantium voluptatibus, vel quidem quis dolorum minima officiis sint itaque consequatur odio, labore ipsum. Accusamus maxime sit consequuntur non eius, distinctio temporibus porro, assumenda, nam adipisci perspiciatis recusandae ut? Officia, explicabo sequi impedit nostrum vitae est delectus dolores voluptates magnam qui laboriosam modi sunt facilis id labore, quibusdam aperiam a quasi expedita at debitis, odit harum eos. Temporibus odit quos culpa soluta numquam assumenda blanditiis vitae nam sequi! Nobis reiciendis provident illo amet a beatae error accusantium quas repellendus quia hic voluptatum dolores voluptate dicta et sunt unde iste, eum quos modi. Quos, nulla veniam labore recusandae sint ipsam in ex dolorum at a molestiae iste deleniti? Veniam deserunt amet odit, pariatur, iusto quis velit numquam ea labore beatae officia placeat, ad temporibus facere aliquam harum quo earum obcaecati sequi illo. Delectus libero nam similique. Iure non magnam tempora repudiandae, deserunt quo voluptas veniam quisquam saepe maiores numquam dignissimos officiis temporibus voluptatem animi a, in quas at facilis laborum labore amet voluptatum doloremque blanditiis? Et dolores, magnam deserunt vitae repellat accusamus qui similique, eius aliquam iure non tempore quia ab commodi odit eaque ut dolorem modi quae. Pariatur rerum obcaecati deleniti? Animi officiis, corporis neque voluptatum perferendis autem, placeat cupiditate temporibus eaque impedit natus nostrum cumque sequi alias in molestiae assumenda quibusdam? Repellat quis quasi aliquam illo consequuntur dicta aspernatur tenetur ullam aperiam alias quae necessitatibus, tempore culpa facilis mollitia numquam? Explicabo, debitis! Dolores vero, voluptatum provident natus eligendi in quasi.</p>
                     {/* 彈跳視窗內容 */}
