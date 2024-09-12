@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+        function App() {
+            const [userId, setUserId] = useState("");
+            const [userName, setUserName] = useState("");
+            // 送出事件處理程序
+            const submitHandler = (ev) => {
+                // 取消html的預設行為
+                ev.preventDefault();
+                console.log(userId);
+                console.log(userName);
+            };
+
+            // 文字方塊異動處理程序
+            const onChangeHandler = (ev) => {
+                setUserId(ev.target.value);
+            };
+            // 文字方塊異動處理程序
+            const onChangeHandler2 = (ev) => {
+                setUserName(ev.target.value);
+            };
+            return <>
+                <form onSubmit={submitHandler}>
+                    <label htmlFor="uid">帳號{userId}</label>
+                    <input type="text" id="uid" onChange={onChangeHandler} />
+                    <label htmlFor="userName">名稱{userName}</label>
+                    <input type="text" id="userName" onChange={onChangeHandler2} />
+                    <button type="submit">送出</button>
+                </form>
+            </>
+        }
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>

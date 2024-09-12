@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+        function App() {
+            // 單選核取方塊用
+            const [checked, setChecked] = useState(false);
+            // 多選核取方塊用
+            const [checkList, setCheckList] = useState([]);
+
+            // 建立一個函式處理是否被選取
+            const handleCheckList = (ev) => {
+                // console.log(ev.target.checked);
+                if (ev.target.checked) {
+                    // 有被勾選
+                    setCheckList([...checkList, ev.target.value]);
+                } else {
+                    // 沒有被勾選
+                    // filter會回傳一個新陣列，其中cbfn回傳true的時候會保留item，否則捨棄
+                    setCheckList(checkList.filter((item) => item !== ev.target.value));
+                }
+            };
+            return <>
+                {/* #1 核取方塊-checkbox */}
+                <label htmlFor="isCheck">確認狀態</label>
+                <input type="checkbox" id="isCheck"
+                    value={checked}
+                    onChange={(ev) => {
+                        setChecked(ev.target.checked);
+                        // console.dir(ev);
+                    }}
+                />
+                <p>{checked.toString()}</p>
+
+                {/* #2 多個核取方塊-checkbox */}
+                <label htmlFor="checkList1">冰淇淋</label>
+                <input type="checkbox" id="checkList1" value="冰淇淋" name="drink" onChange={handleCheckList} />
+                <label htmlFor="checkList2">冰拿鐵</label>
+                <input type="checkbox" id="checkList2" value="冰拿鐵" name="drink" onChange={handleCheckList} />
+                <label htmlFor="checkList3">冰美式</label>
+                <input type="checkbox" id="checkList3" value="冰美式" name="drink" onChange={handleCheckList} />
+                <p>被選取的飲料有： {checkList}</p>
+
+            </>
+        }
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>

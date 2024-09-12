@@ -20,10 +20,19 @@
             const cityArr = [
                 "台北市",
                 "新北市",
-                "台中市"
-            ]
+                "台中市",
+                "桃園市"
+            ];
             const [selectedCity, setSelectedCity] = useState("");
-
+            
+            const cityArr2 = [
+                "台北市",
+                "新北市",
+                "台中市",
+                "桃園市"
+            ];
+            const [selectedCity2, setSelectedCity2] = useState([]);
+            
             return <>
                 {/* #1 input */}
                 <label htmlFor="username">使用者名稱</label>
@@ -44,6 +53,27 @@
                     }
                 </select>
                 <p>下拉選單內容: {selectedCity}</p>
+                <hr />
+                {/* #3 複選的select */}
+                <select name="" id="" multiple size="5"
+                value={selectedCity2}
+                onChange={(ev)=>{
+                    // console.dir(ev);
+                    // console.log(ev.target.selectedOptions[0].value);
+                    // console.log([...ev.target.selectedOptions]);
+                    // console.log(...ev.target.selectedOptions);
+                    // console.log(Array.from(ev.target.selectedOptions));
+                    setSelectedCity2([...ev.target.selectedOptions].map((opt)=>opt.value));
+                }}
+                >
+                    <option value="" disabled>請選擇</option>
+                    {
+                        cityArr2.map((city, index) => {
+                            return <option key={index} value={city}>{city}</option>
+                        })
+                    }
+                </select>
+                <p>下拉選單內容: {selectedCity2}</p>
             </>
         }
         ReactDOM
